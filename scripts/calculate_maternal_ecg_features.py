@@ -5,8 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.signal import find_peaks
 from ecgdetectors import Detectors
-from compute_12_lead_ecg import calculate_ecg
-
+from calculate_12_lead_ecg import calculate_ecg
 
 
 def get_arguments(input_args):
@@ -148,6 +147,7 @@ def print_results(points, ecg):
     print_features("RR", RR, "ms")
     print_features("QRS_dur", QRS_dur, "ms", [QRS_dur_min, QRS_dur_max])
 
+
 if __name__ == "__main__":
     args = get_arguments(sys.argv)
     filename = args.filename
@@ -160,7 +160,7 @@ if __name__ == "__main__":
 
     points = calculate_points(ecg)
     p_R, p_bQ, p_aS, p_T, p_aT = points
-    
+
     plt.plot(ecg[1, :])
 
     plt.plot(p_R, ecg[1, p_R], "*", label="p_R")

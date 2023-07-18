@@ -4,8 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.signal import find_peaks
 from ecgdetectors import Detectors
-from compute_12_lead_ecg import calculate_ecg
-
+from calculate_12_lead_ecg import calculate_ecg
 
 
 def get_arguments(input_args):
@@ -22,6 +21,7 @@ def detect_qrs(ecg_signal, fs=360):
     detector = detectors.hamilton_detector
     return np.array(detector(ecg_signal))
 
+
 def calculate_consecutive_angles(arr):
     v = np.diff(arr)  # check correct axis
     u = v / np.linalg.norm(v, axis=0)
@@ -36,7 +36,7 @@ def calculate_consecutive_angles(arr):
 def find_perpendicular_angle(angles, tol=1e-3):
     indexes_bool = (angles < (np.pi/2 + tol)) & (angles > (np.pi/2 - tol))
     indexes = np.arange(len(angles))[indexes_bool]
-    return indexes[-1]  
+    return indexes[-1]
 
 
 def calculate_points(ecg):
